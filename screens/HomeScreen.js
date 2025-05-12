@@ -5,11 +5,22 @@ import moment from 'moment';
 import Context from '../components/Context';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import { useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 export default function HomeScreen() {
   const insets = useSafeAreaInsets();
   const date = moment().format('ll');
   const profile = useSelector(state => state.profile);
   const name = profile.name;
+  const navigation=useNavigation();
+  const verses = [
+    {
+      id: 1,
+      title: "Verse of the day",
+      verseText:
+        'In the beginning was the word, and the word was with God, and the word was God.',
+    }
+  ];
+
   return (
     <ScrollView
       style={[
@@ -37,7 +48,20 @@ export default function HomeScreen() {
           <Text style={styles.date}>{date}</Text>
         </View>
       </View>
-      <Verse title={'Verse of the day'} id={1} verseText={"In the beginning was the word, and the word was with God, and the word was God."}/>
+      {verses?.map(
+              verse =>
+                verse && (
+                  <Verse
+                    key={verse.id}
+                    id={verse.id}
+                    title={verse.title}
+                    verseText={verse.verseText}
+                    onPress={() => {
+                      navigation.navigate('HistoryComment', {verse});
+                    }}
+                  />
+                ),
+            )}
       <Context title={"Today's Reflection"} description={"God's plan for us is filled with hope. Reflect on the assurance that His pro..."}/>
       <Context title={"Context Chapter"} description={"What does John 1:1 KJV mean?"}/>
       <View style={styles.innerContainer}>

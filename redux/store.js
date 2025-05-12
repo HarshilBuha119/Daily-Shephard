@@ -12,7 +12,7 @@ const persistConfig = {
   storage: AsyncStorage,
   whitelist: ['intro', 'auth', 'profile', 'fav'],
 };
-
+  
 const rootReducer = combineReducers({
   profile: profileSlice,
   intro: introSlice,

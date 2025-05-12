@@ -2,8 +2,17 @@ import {View, Text, StyleSheet, Image, ScrollView} from 'react-native';
 import {Images} from '../assets/Images';
 import Verse from '../components/Verse';
 import Context from '../components/Context';
-export default function History({route}) {
-  const {verse} = route.params;
+export default function History({ route }) {
+  const verse = route?.params?.verse;
+
+  if (!verse) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.text}>No verse data available</Text>
+      </View>
+    );
+  }
+  
   return (
     <>
       <View style={styles.divider} />
