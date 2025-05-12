@@ -8,11 +8,13 @@ export default function Verse({ id, title, verseText, onPress ,username}) {
   const favourites = useSelector(selectFavourites) || [];
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  console.log(username);
+  
   const handleShare = async () => {
     try {
       const shareOptions = {
         title: 'Share Verse',
-        message: `${verseText}\n\n— ${title}`,
+        message: `${verseText}\n\n— ${title} \n\n—${username}`,
       };
       await Share.open(shareOptions);
     } catch (error) {
@@ -28,7 +30,7 @@ export default function Verse({ id, title, verseText, onPress ,username}) {
     if (isFavourite) {
       dispatch(removeFavourite(id));
     } else {
-      dispatch(addFavourite({ id, title, verseText}));
+      dispatch(addFavourite({ id, title, verseText, username }));
     }
   };
 
@@ -41,7 +43,7 @@ export default function Verse({ id, title, verseText, onPress ,username}) {
       <View style={styles.Scripture}>
         <View style={styles.title}>
           <Text style={styles.text}>{title}</Text>
-          <Text style={styles.name}>{username}</Text>
+          <Text style={styles.name}>{username ? username : "Unknown verse"}</Text>
         </View>
         <Pressable style={styles.button}>
           <Image style={{ height: 15, width: 15 }} source={Images.Speaker} resizeMode="contain" />

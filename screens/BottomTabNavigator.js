@@ -14,6 +14,7 @@ const BottomTabNavigator = () => {
       screenOptions={({route}) => ({
         headerShown: false,
         tabBarShowLabel:false,
+        tabBarPosition:'bottom',
         tabBarStyle: {
           height: 80,
           backgroundColor:"#18171C"
@@ -56,6 +57,7 @@ const BottomTabNavigator = () => {
         component={HomeScreen}
       />
       <Tab.Screen name="Podcast" component={PodCastScreen} options={{
+            tabBarHideOnKeyboard:true,
             headerShown: true,
             headerStyle: {
               backgroundColor: '#18171C',
@@ -67,7 +69,8 @@ const BottomTabNavigator = () => {
               fontSize:25
             }
           }}/>
-      <Tab.Screen name="History" component={HistoryScreen} />
+      <Tab.Screen name="History" component={HistoryScreen} options={{
+            tabBarHideOnKeyboard:true,}}/>
       <Tab.Screen name="Profile" component={ProfileScreen} options={{
             headerShown: true,
             headerStyle: {

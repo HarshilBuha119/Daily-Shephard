@@ -8,7 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 function FavoritesScreen() {
   const favourites = useSelector(selectFavourites) || [];
   const navigation=useNavigation()
-  console.log(favourites[0].username);
+  console.log(JSON.stringify(favourites, null, 3));
+
   
   return (
     <>

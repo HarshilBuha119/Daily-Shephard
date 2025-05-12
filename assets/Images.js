@@ -20,8 +20,6 @@ export const Images={
     Apple:require("./Apple.png"),
     PFP:require("./PFP.png"),
     Add:require("./Add.png"),
-    On:require("./On.png"),
-    Off:require("./Off.png"),
     Time:require("./Time.png"),
     Morning:require("./Morning.png"),
     Podcast:require("./Podcast.png"),

@@ -92,7 +92,7 @@ export default function ProfileScreen() {
   return (
     <>
       <View style={styles.div}></View>
-      <ScrollView style={styles.container}>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <ProfileHeader />
         <Pressable
           onPress={() => navigation.navigate('Favourite')}
