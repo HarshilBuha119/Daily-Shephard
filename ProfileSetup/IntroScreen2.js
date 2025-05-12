@@ -2,7 +2,7 @@
 import React, {useEffect} from 'react';
 import {ScrollView, StyleSheet, Pressable, Text, Image} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation,CommonActions} from '@react-navigation/native';
 import {Images} from '../assets/Images';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {completeIntro} from '../redux/slices/introSlice';
@@ -15,13 +15,17 @@ export default function IntroScreen2() {
 
   useEffect(() => {
     if (hasSeenIntro) {
-      navigation.replace('Login');
+      navigation.dispatch(
+            CommonActions.reset({ index: 0,
+            routes: [{ name: 'Login' }], }) );
     }
   }, [hasSeenIntro, navigation]);
 
   const handleContinue = () => {
     dispatch(completeIntro());
-    navigation.replace("Login")
+    navigation.dispatch(
+          CommonActions.reset({ index: 0,
+          routes: [{ name: 'Login' }], }) );
   };
 
   return (

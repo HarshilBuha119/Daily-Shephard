@@ -1,53 +1,51 @@
-import React, {useState} from 'react';
-import {View, Text, Image, Pressable, ScrollView} from 'react-native';
-import {styles} from '../components/Styles';
-import {Images} from '../assets/Images';
+import React, { useState } from 'react';
+import { View, Text, Image, Pressable, ScrollView } from 'react-native';
+import { styles } from '../components/Styles';
+import { Images } from '../assets/Images';
 import BottomSheetTheme from '../components/BottomSheetTheme';
-import { BottomSheetFont  } from '../components/BottomSheetFont';
+import BottomSheetFont  from '../components/BottomSheetFont';
 import Modall from '../components/Modal';
-import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
-import {logout} from '../redux/slices/authSlice';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/slices/authSlice';
 import MenuItems from '../menus/MenuItems';
 import MenuBox from '../menus/menuBox';
 import ProfileHeader from '../ProfileScreen/ProfileHeader';
 import { persistor } from '../redux/store';
 import { cleanFavourite } from '../redux/slices/favSlice';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function ProfileScreen() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [currentTheme, setCurrentTheme] = useState('Dark');
   const [currentFontSize, setCurrentFontSize] = useState('Large');
-  const [isThemeBottomSheetVisible, setThemeBottomSheetVisible] =
-    useState(false);
+  const [isThemeBottomSheetVisible, setThemeBottomSheetVisible] = useState(false);
   const [isFontBottomSheetVisible, setFontBottomSheetVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const insets=useSafeAreaInsets()
   const [modalConfig, setModalConfig] = useState({
     image: null,
     text: '',
-    button1: {text: '', onPress: null},
-    button2: {text: '', onPress: null},
+    button1: { text: '', onPress: null },
+    button2: { text: '', onPress: null },
   });
 
-  const handleThemeSave = theme => {
+  const handleThemeSave = (theme) => {
     setCurrentTheme(
-      theme === 'light' ? 'Light' : theme === 'dark' ? 'Dark' : 'Device',
+      theme === 'light' ? 'Light' : theme === 'dark' ? 'Dark' : 'Device'
     );
     setThemeBottomSheetVisible(false);
   };
-  const handleFontSave = fontSize => {
+
+  const handleFontSave = (fontSize) => {
     setCurrentFontSize(
-      fontSize === 'small'
-        ? 'Small'
-        : fontSize === 'medium'
-        ? 'Medium'
-        : 'Large',
+      fontSize === 'small' ? 'Small' : fontSize === 'medium' ? 'Medium' : 'Large'
     );
     setFontBottomSheetVisible(false);
   };
 
-  const openModal = type => {
+  const openModal = (type) => {
     if (type === 'delete') {
       setModalConfig({
         image: Images.Delete,
@@ -55,10 +53,9 @@ export default function ProfileScreen() {
         button1: {
           text: 'Delete Account',
           onPress: async () => {
-            dispatch(cleanFavourite())
+            dispatch(cleanFavourite());
             dispatch(logout());
-            console.log("Account deleted");
-            
+            console.log('Account deleted');
             await persistor.purge();
           },
         },
@@ -76,9 +73,9 @@ export default function ProfileScreen() {
         button1: {
           text: 'Logout',
           onPress: async () => {
-            dispatch(cleanFavourite())
-            dispatch(logout()); // Sets isSignIn to false, skipIntro to true
-            await persistor.purge(); // Uncomment if you want to clear all persisted state
+            dispatch(cleanFavourite());
+            dispatch(logout());
+            await persistor.purge();
           },
         },
         button2: {
@@ -96,9 +93,9 @@ export default function ProfileScreen() {
     <>
       <View style={styles.div}></View>
       <ScrollView style={styles.container}>
-        <ProfileHeader/>
+        <ProfileHeader />
         <Pressable
-          onPress={navigation.navigate.bind(null, 'Favourite')}
+          onPress={() => navigation.navigate('Favourite')}
           style={[
             styles.menuItems,
             {
@@ -107,22 +104,15 @@ export default function ProfileScreen() {
               marginTop: 10,
               paddingHorizontal: 10,
             },
-          ]}>
+          ]}
+        >
           <View style={styles.menuItemLeft}>
-            <Image
-              style={styles.img}
-              source={Images.Fav}
-              resizeMode="contain"
-            />
+            <Image style={styles.img} source={Images.Fav} resizeMode="contain" />
             <Text style={styles.menuText}>Favorites</Text>
           </View>
-          <Image
-            style={styles.img}
-            source={Images.Arrow}
-            resizeMode="contain"
-          />
+          <Image style={styles.img} source={Images.Arrow} resizeMode="contain" />
         </Pressable>
-
+        
         <MenuBox title={'Personalize'}>
           <MenuItems
             Img={Images.Color}
@@ -138,12 +128,12 @@ export default function ProfileScreen() {
             extra={currentFontSize}
             isLast={false}
           />
-          <MenuItems Img={Images.Notification} menuName={'Notifications'} isLast={true}/>
+          <MenuItems Img={Images.Notification} menuName={'Notifications'} isLast={true} />
         </MenuBox>
         <MenuBox title={'General'}>
-          <MenuItems Img={Images.Color} menuName={'Contact Support'} isLast={false}/>
-          <MenuItems Img={Images.Font} menuName={'About Us'} isLast={false}/>
-          <MenuItems Img={Images.Notification} menuName={'Terms & Privacy'} isLast={true}/>
+          <MenuItems Img={Images.Color} menuName={'Contact Support'} isLast={false} />
+          <MenuItems Img={Images.Font} menuName={'About Us'} isLast={false} />
+          <MenuItems Img={Images.Notification} menuName={'Terms & Privacy'} isLast={true} />
         </MenuBox>
         <MenuBox title={'Account'}>
           <MenuItems

@@ -4,7 +4,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { addFavourite, removeFavourite, selectFavourites } from "../redux/slices/favSlice";
 import Share from 'react-native-share';
-export default function Verse({ id, title, verseText, onPress }) {
+export default function Verse({ id, title, verseText, onPress ,username}) {
   const favourites = useSelector(selectFavourites) || [];
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -28,7 +28,7 @@ export default function Verse({ id, title, verseText, onPress }) {
     if (isFavourite) {
       dispatch(removeFavourite(id));
     } else {
-      dispatch(addFavourite({ id, title, verseText }));
+      dispatch(addFavourite({ id, title, verseText}));
     }
   };
 
@@ -37,14 +37,11 @@ export default function Verse({ id, title, verseText, onPress }) {
       if(onPress){
         onPress()
       }
-      else{
-        navigation.navigate("HistoryComment")
-      }
     }}>
       <View style={styles.Scripture}>
         <View style={styles.title}>
           <Text style={styles.text}>{title}</Text>
-          <Text style={styles.name}>John 1:1 KJV</Text>
+          <Text style={styles.name}>{username}</Text>
         </View>
         <Pressable style={styles.button}>
           <Image style={{ height: 15, width: 15 }} source={Images.Speaker} resizeMode="contain" />

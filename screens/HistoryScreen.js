@@ -1,4 +1,4 @@
-import {View, Image, StyleSheet, TextInput} from 'react-native';
+import {ScrollView,View, Image, StyleSheet, TextInput} from 'react-native';
 import {Images} from '../assets/Images';
 import Verse from '../components/Verse';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -13,12 +13,14 @@ export default function HistoryScreen() {
   const verses = [
     {
       id: 2,
+      username:"1 Corinthians 15:57",
       title: date,
       verseText:
         'But thanks be to God! He gives us the victory through our Lord.',
     },
     {
       id: 3,
+      username:"Romans 12:12",
       title: date,
       verseText:
         'Be joyful in hope, patient in affliction, and faithful in prayer.',
@@ -26,7 +28,7 @@ export default function HistoryScreen() {
   ];
 
   return (
-    <View
+    <ScrollView
       style={[
         styles.container,
         {paddingTop: insets.top, paddingBottom: insets.bottom},
@@ -50,6 +52,7 @@ export default function HistoryScreen() {
             <Verse
               key={verse.id}
               id={verse.id}
+              username={verse.username}
               title={verse.title}
               verseText={verse.verseText}
               onPress={() => {
@@ -58,7 +61,7 @@ export default function HistoryScreen() {
             />
           ),
       )}
-    </View>
+    </ScrollView>
   );
 }
 

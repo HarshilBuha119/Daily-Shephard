@@ -1,204 +1,142 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
+import RBSheet from 'react-native-raw-bottom-sheet';
 
+export default function BottomSheetFont({ visible, onClose, onSave }) {
+  const [selectedFontSize, setSelectedFontSize] = useState('medium'); // Default to 'medium' as shown in the image
+  const bottomSheetRef = useRef(null);
 
-import React, {useCallback, useRef, useMemo, useState, useEffect} from 'react';
-import Close from './Close';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  Pressable,
-} from 'react-native';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import BottomSheet, {BottomSheetSectionList} from '@gorhom/bottom-sheet';
-import {Images} from '../assets/Images';
-
-export const BottomSheetFont = ({visible, onClose, onSave}) => {
-  // hooks
-  const sheetRef = useRef(null);
-  const [selectedTheme, setSelectedTheme] = useState('dark'); // Default to "dark"
-
-  // variables
-  const sections = useMemo(
-    () => [
-      {
-        title: 'Appearance',
-        data: [
-          {id: 'light', label: 'Light theme', selected: false},
-          {id: 'dark', label: 'Dark theme', selected: false},
-          {id: 'device', label: 'Device theme', selected: false},
-        ],
-      },
-    ],
-    [],
-  );
-  const snapPoints = useMemo(() => ['90%'], []);
-  const updatedSections = useMemo(() => {
-    return sections.map(sec =>
-      sec.title === 'Appearance'
-        ? {
-            ...sec,
-            data: sec.data.map(item => ({
-              ...item,
-              selected: item.id === selectedTheme,
-            })),
-          }
-        : sec,
-    );
-  }, [sections, selectedTheme]);
-
-  // callbacks
-  const handleSheetChange = useCallback(
-    index => {
-      console.log('handleSheetChange', index);
-      if (index === -1) onClose();
-    },
-    [onClose],
-  );
-
-  const handleSave = useCallback(() => {
-    onSave(selectedTheme);
-    onClose();
-  }, [selectedTheme, onSave, onClose]);
-
-  // Effect to handle initial visibility
+  // Open or close the bottom sheet based on the `visible` prop
   useEffect(() => {
-    if (visible && sheetRef.current) {
-      sheetRef.current.snapToIndex(0);
-    } else if (!visible && sheetRef.current) {
-      sheetRef.current.close();
+    if (visible) {
+      bottomSheetRef.current?.open();
+    } else {
+      bottomSheetRef.current?.close();
     }
   }, [visible]);
 
-  // render
-  const renderSectionHeader = useCallback(
-    ({section}) => (
-      <View style={styles.sectionHeaderContainer}>
-        <Text style={styles.sectionHeaderText}>{section.title}</Text>
-      </View>
-    ),
-    [],
-  );
-
-  const renderItem = useCallback(
-    ({item}) => (
-      <TouchableOpacity
-        style={styles.itemContainer}
-        onPress={() => setSelectedTheme(item.id)}>
-        <Text style={styles.itemText}>{item.label}</Text>
-        {item.selected ? (
-          <Image style={styles.radio} source={Images.RadioColor} />
-        ) : (
-          <Image style={styles.radio} source={Images.Radio} />
-        )}
-      </TouchableOpacity>
-    ),
-    [],
-  );
-
-  if (!visible) return null;
+  const handleSave = () => {
+    onSave(selectedFontSize); // Call the onSave prop with the selected font size
+    onClose(); // Close the bottom sheet
+  };
 
   return (
-    <GestureHandlerRootView style={styles.container}>
-      <BottomSheet
-        ref={sheetRef}
-        index={visible ? 0 : -1}
-        snapPoints={snapPoints}
-        enablePanDownToClose={true}
-        handleComponent={() => <Close handle={handleSave} />}
-        onClose={handleSave}
-        enableDynamicSizing={false}
-        onChange={handleSheetChange}
-        backgroundStyle={styles.bottomSheetBackground}>
-        
-        <BottomSheetSectionList
-          sections={updatedSections}
-          keyExtractor={item => item.id}
-          renderSectionHeader={renderSectionHeader}
-          renderItem={renderItem}
-          contentContainerStyle={styles.contentContainer}
-        />
-        <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
+    <RBSheet
+      ref={bottomSheetRef}
+      height={310} // Adjust height as needed
+      openDuration={250}
+      closeOnDragDown={true}
+      closeOnPressMask={true}
+      onClose={onClose}
+      customStyles={{
+        container: styles.sheetContainer,
+        draggableIcon: styles.draggableIcon,
+      }}
+    >
+      <View style={styles.contentContainer}>
+        <Text style={styles.title}>Font Size</Text>
+
+        {/* Small Font Size Option */}
+        <Pressable
+          style={styles.option}
+          onPress={() => setSelectedFontSize('small')}
+        >
+          <Text style={styles.optionText}>Small</Text>
+          <View style={styles.radioButton}>
+            {selectedFontSize === 'small' && <View style={styles.radioButtonSelected} />}
+          </View>
+        </Pressable>
+
+        {/* Medium Font Size Option */}
+        <Pressable
+          style={styles.option}
+          onPress={() => setSelectedFontSize('medium')}
+        >
+          <Text style={styles.optionText}>Medium</Text>
+          <View style={styles.radioButton}>
+            {selectedFontSize === 'medium' && <View style={styles.radioButtonSelected} />}
+          </View>
+        </Pressable>
+
+        {/* Large Font Size Option */}
+        <Pressable
+          style={styles.option}
+          onPress={() => setSelectedFontSize('large')}
+        >
+          <Text style={styles.optionText}>Large</Text>
+          <View style={styles.radioButton}>
+            {selectedFontSize === 'large' && <View style={styles.radioButtonSelected} />}
+          </View>
+        </Pressable>
+
+        {/* Save Button */}
+        <Pressable style={styles.saveButton} onPress={handleSave}>
           <Text style={styles.saveButtonText}>Save preference</Text>
-        </TouchableOpacity>
-      </BottomSheet>
-    </GestureHandlerRootView>
+        </Pressable>
+      </View>
+    </RBSheet>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'black',
-  },
-  contentContainer: {
-    backgroundColor: '#1A1A1A',
+  sheetContainer: {
+    backgroundColor: '#1E1E1E',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingHorizontal: 20,
     paddingVertical: 10,
   },
-  sectionHeaderContainer: {
-    padding: 10,
-    backgroundColor: '#1A1A1A',
+  draggableIcon: {
+    backgroundColor: '#FFFFFF',
+    width: 40,
+    height: 5,
+    borderRadius: 3,
   },
-  sectionHeaderText: {
-    color: '#FFF',
-    fontSize: 16,
-    fontWeight: 'bold',
-    borderBottomColor: '#2F2F37',
-    borderBottomWidth: 1,
-  },
-  itemContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 15,
-    backgroundColor: '#1A1A1A',
-    borderBottomWidth: 1,
-    borderBottomColor: '#333',
-  },
-  itemText: {
-    color: '#FFF',
-    fontSize: 16,
+  contentContainer: {
     flex: 1,
+    paddingTop: 10,
   },
-  selectedIndicator: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: 20,
+  },
+  option: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingVertical: 15,
+  },
+  optionText: {
+    fontSize: 16,
+    color: '#FFFFFF',
+  },
+  radioButton: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: '#20C997',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  radioButtonSelected: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
     backgroundColor: '#20C997',
-    marginRight: 10,
   },
   saveButton: {
     backgroundColor: '#20C997',
-    padding: 15,
-    alignItems: 'center',
-    margin: 10,
     borderRadius: 25,
+    paddingVertical: 15,
+    alignItems: 'center',
+    marginTop: 20,
   },
   saveButtonText: {
-    color: '#000',
     fontSize: 16,
+    color: '#FFFFFF',
     fontWeight: 'bold',
-    borderRadius: 10,
-  },
-  bottomSheetBackground: {
-    backgroundColor: '#1A1A1A',
-  },
-  radio: {
-    height: 20,
-    width: 20,
-  },
-  closeButton: {
-    position: 'absolute',
-    top: -10,
-    left:"43.9%",
-    zIndex: 99,
-  },
-  closeX: {
-    color: 'white',
-    backgroundColor: '#333',
-    borderRadius: 35,
-    height:50,
-    width:50
   },
 });
-

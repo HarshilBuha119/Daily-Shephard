@@ -9,7 +9,7 @@ import { Images } from '../assets/Images';
 import ImageShow from '../components/ImageShow';
 import { useState } from 'react';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-export default function PodCastScreen({ navigation }) {
+export default function PodCastScreen() {
   const insets = useSafeAreaInsets();
   const [searchQuery, setSearchQuery] = useState('');
   const podcasts = [
@@ -26,7 +26,7 @@ export default function PodCastScreen({ navigation }) {
       ],
     },
     {
-      image: Images.Image,
+      image: Images.Image1,
       title: 'LifeAudio',
       description: 'How to Study the Bible - Bible Study Made Simple',
       publisher: 'LifeAudio',
@@ -38,7 +38,7 @@ export default function PodCastScreen({ navigation }) {
       ],
     },
     {
-      image: Images.Image,
+      image: Images.Image2,
       title: 'Dr. Melody Stevens',
       description: 'The Bible in a Year Podcast with Dr. Melody',
       publisher: 'Dr. Melody Stevens',
@@ -50,7 +50,7 @@ export default function PodCastScreen({ navigation }) {
       ],
     },
     {
-      image: Images.Image,
+      image: Images.Image3,
       title: 'LifeAudio',
       description: 'Faith Over Fear',
       publisher: 'LifeAudio',
@@ -63,7 +63,7 @@ export default function PodCastScreen({ navigation }) {
       ],
     },
     {
-      image: Images.Image,
+      image: Images.Image4,
       title: 'Radically Christian',
       description: 'Daily Bible',
       publisher: 'Radically Christian',

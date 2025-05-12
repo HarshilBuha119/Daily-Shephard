@@ -27,7 +27,7 @@ export default function Notification() {
   // Interpolations for circle position and background colors
   const circlePosition = animation.interpolate({
     inputRange: [0, 1],
-    outputRange: [1, 55 - 30 - 5], // padding = 5, width = 106, circle = 40
+    outputRange: [-2, 55 - 30 - 5], // padding = 5, width = 106, circle = 40
   });
 
   const borderColor = animation.interpolate({
@@ -146,22 +146,22 @@ const styles = StyleSheet.create({
   },
   // Custom Switch Styles
   switchContainer: {
-    width: 60,
-    height: 35,
+    width: 55,
+    height: 32  ,
     borderRadius: 25,
     borderWidth: 2,
     padding: 5,
     justifyContent: 'center',
   },
   circle: {
-    width: 25,
-    height: 25,
+    width: 23,
+    height: 23,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
   },
   check: {
-    color: 'white',
+    color: 'black',
     fontSize: 18,
     fontWeight: 'bold',
   },

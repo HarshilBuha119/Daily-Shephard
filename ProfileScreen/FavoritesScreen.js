@@ -8,6 +8,8 @@ import { useNavigation } from '@react-navigation/native';
 function FavoritesScreen() {
   const favourites = useSelector(selectFavourites) || [];
   const navigation=useNavigation()
+  console.log(favourites[0].username);
+  
   return (
     <>
       <View style={styles.divider}></View>
@@ -18,6 +20,7 @@ function FavoritesScreen() {
                     <Verse
                       key={verse.id}
                       id={verse.id}
+                      username={verse.username}
                       title={verse.title}
                       verseText={verse.verseText}
                       onPress={() => navigation.navigate('HistoryComment', { verse })}

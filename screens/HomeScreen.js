@@ -15,12 +15,15 @@ export default function HomeScreen() {
   const verses = [
     {
       id: 1,
+      username:"John 1:1 KJV",
       title: "Verse of the day",
       verseText:
         'In the beginning was the word, and the word was with God, and the word was God.',
     }
   ];
-
+  const handleNavigation=()=>{
+    
+  }
   return (
     <ScrollView
       style={[
@@ -52,12 +55,15 @@ export default function HomeScreen() {
               verse =>
                 verse && (
                   <Verse
-                    key={verse.id}
-                    id={verse.id}
+                    key={1}
+                    id={1}
+                    username={verse.username}
                     title={verse.title}
                     verseText={verse.verseText}
                     onPress={() => {
                       navigation.navigate('HistoryComment', {verse});
+                      console.log(verse.username);
+                      
                     }}
                   />
                 ),

@@ -17,7 +17,7 @@ export default function History({ route }) {
     <>
       <View style={styles.divider} />
       <ScrollView style={styles.container}>
-        <Verse id={verse.id} title={verse.title} verseText={verse.verseText} />
+        <Verse id={verse.id} title={verse.title} verseText={verse.verseText} username={verse.username}/>
         <Context
           title={"Today's Reflection"}
           description={
