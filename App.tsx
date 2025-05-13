@@ -29,7 +29,7 @@ const NavigationLogin = () => {
   return (
     <Stack.Navigator
     initialRouteName={!hasSeen ? 'Intro1' : 'Login'}
-      screenOptions={{
+      screenOptions={{ 
         headerShown: false,
         statusBarBackgroundColor: '#18171C',
       }}>

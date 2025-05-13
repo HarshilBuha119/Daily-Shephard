@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import FloatingCloseButton from './FloatingCloseButton';
 
 export default function BottomSheetFont({ visible, onClose, onSave }) {
-  const [selectedFontSize, setSelectedFontSize] = useState('medium'); // Default to 'medium' as shown in the image
+   const [selectedFontSize, setSelectedFontSize] = useState('medium'); 
   const bottomSheetRef = useRef(null);
 
-  // Open or close the bottom sheet based on the `visible` prop
   useEffect(() => {
     if (visible) {
       bottomSheetRef.current?.open();
@@ -16,17 +16,20 @@ export default function BottomSheetFont({ visible, onClose, onSave }) {
   }, [visible]);
 
   const handleSave = () => {
-    onSave(selectedFontSize); // Call the onSave prop with the selected font size
-    onClose(); // Close the bottom sheet
+    onSave(selectedFontSize);
+    setTimeout(() => {
+    onClose();
+  }, 1);
   };
 
   return (
     <RBSheet
       ref={bottomSheetRef}
-      height={310} // Adjust height as needed
+      height={310}
       openDuration={250}
       closeOnDragDown={true}
       closeOnPressMask={true}
+      handleComponent={() => <FloatingCloseButton onPress={onClose} />} // Pass onClose to FloatingCloseButton
       onClose={onClose}
       customStyles={{
         container: styles.sheetContainer,
@@ -36,18 +39,16 @@ export default function BottomSheetFont({ visible, onClose, onSave }) {
       <View style={styles.contentContainer}>
         <Text style={styles.title}>Font Size</Text>
 
-        {/* Small Font Size Option */}
         <Pressable
           style={styles.option}
           onPress={() => setSelectedFontSize('small')}
         >
           <Text style={styles.optionText}>Small</Text>
           <View style={styles.radioButton}>
-            {selectedFontSize === 'small' && <View style={styles.radioButtonSelected} />}
+            {selectedFontSize === 'small'  && <View style={styles.radioButtonSelected} />}
           </View>
         </Pressable>
 
-        {/* Medium Font Size Option */}
         <Pressable
           style={styles.option}
           onPress={() => setSelectedFontSize('medium')}
@@ -58,7 +59,6 @@ export default function BottomSheetFont({ visible, onClose, onSave }) {
           </View>
         </Pressable>
 
-        {/* Large Font Size Option */}
         <Pressable
           style={styles.option}
           onPress={() => setSelectedFontSize('large')}
@@ -69,7 +69,6 @@ export default function BottomSheetFont({ visible, onClose, onSave }) {
           </View>
         </Pressable>
 
-        {/* Save Button */}
         <Pressable style={styles.saveButton} onPress={handleSave}>
           <Text style={styles.saveButtonText}>Save preference</Text>
         </Pressable>
@@ -91,6 +90,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 5,
     borderRadius: 3,
+    marginBottom: 10, // Add some spacing below the draggable icon
   },
   contentContainer: {
     flex: 1,

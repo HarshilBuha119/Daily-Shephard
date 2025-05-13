@@ -14,6 +14,7 @@ import ProfileHeader from '../ProfileScreen/ProfileHeader';
 import { persistor } from '../redux/store';
 import { cleanFavourite } from '../redux/slices/favSlice';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import FloatingCloseButton from '../components/FloatingCloseButton';
 
 export default function ProfileScreen() {
   const navigation = useNavigation();
@@ -163,6 +164,8 @@ export default function ProfileScreen() {
         onClose={() => setFontBottomSheetVisible(false)}
         onSave={handleFontSave}
       />
+      {isThemeBottomSheetVisible && <FloatingCloseButton onPress={() => setThemeBottomSheetVisible(false)} />}
+      {isFontBottomSheetVisible && <FloatingCloseButton onPress={() => setFontBottomSheetVisible(false)} />}
       <Modall
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}

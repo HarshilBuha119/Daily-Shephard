@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { View, Text, Pressable, StyleSheet } from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
+import FloatingCloseButton from './FloatingCloseButton';
 
 export default function BottomSheetTheme({ visible, onClose, onSave }) {
-  const [selectedTheme, setSelectedTheme] = useState('dark'); // Default to 'dark' as shown in the image
+  const [selectedTheme, setSelectedTheme] = useState('dark');
   const bottomSheetRef = useRef(null);
 
-  // Open or close the bottom sheet based on the `visible` prop
   useEffect(() => {
     if (visible) {
       bottomSheetRef.current?.open();
@@ -16,18 +16,21 @@ export default function BottomSheetTheme({ visible, onClose, onSave }) {
   }, [visible]);
 
   const handleSave = () => {
-    onSave(selectedTheme); // Call the onSave prop with the selected theme
-    onClose(); // Close the bottom sheet
+    onSave(selectedTheme);
+    setTimeout(() => {
+    onClose();
+  }, 2000);
   };
 
   return (
     <RBSheet
       ref={bottomSheetRef}
-      height={310} // Adjust height as needed
+      height={310}
       openDuration={250}
       closeOnDragDown={true}
       closeOnPressMask={true}
-      onClose={onClose} // Trigger onClose when the bottom sheet is dismissed
+      handleComponent={() => <FloatingCloseButton onPress={onClose} />} // Pass onClose to FloatingCloseButton
+      onClose={onClose}
       customStyles={{
         container: styles.sheetContainer,
         draggableIcon: styles.draggableIcon,
@@ -36,7 +39,6 @@ export default function BottomSheetTheme({ visible, onClose, onSave }) {
       <View style={styles.contentContainer}>
         <Text style={styles.title}>Appearance</Text>
 
-        {/* Light Theme Option */}
         <Pressable
           style={styles.option}
           onPress={() => setSelectedTheme('light')}
@@ -47,7 +49,6 @@ export default function BottomSheetTheme({ visible, onClose, onSave }) {
           </View>
         </Pressable>
 
-        {/* Dark Theme Option */}
         <Pressable
           style={styles.option}
           onPress={() => setSelectedTheme('dark')}
@@ -58,7 +59,6 @@ export default function BottomSheetTheme({ visible, onClose, onSave }) {
           </View>
         </Pressable>
 
-        {/* Device Theme Option */}
         <Pressable
           style={styles.option}
           onPress={() => setSelectedTheme('device')}
@@ -69,7 +69,6 @@ export default function BottomSheetTheme({ visible, onClose, onSave }) {
           </View>
         </Pressable>
 
-        {/* Save Button */}
         <Pressable style={styles.saveButton} onPress={handleSave}>
           <Text style={styles.saveButtonText}>Save preference</Text>
         </Pressable>
@@ -80,17 +79,18 @@ export default function BottomSheetTheme({ visible, onClose, onSave }) {
 
 const styles = StyleSheet.create({
   sheetContainer: {
-    backgroundColor: '#1E1E1E', // Dark background to match the image
+    backgroundColor: '#1E1E1E',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
   draggableIcon: {
-    backgroundColor: '#FFFFFF', // White drag handle
+    backgroundColor: '#FFFFFF',
     width: 40,
     height: 5,
     borderRadius: 3,
+    marginBottom: 10, // Add some spacing below the draggable icon
   },
   contentContainer: {
     flex: 1,
@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: '#20C997', // Green border to match the image
+    borderColor: '#20C997',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -125,10 +125,10 @@ const styles = StyleSheet.create({
     width: 12,
     height: 12,
     borderRadius: 6,
-    backgroundColor: '#20C997', // Green fill for selected state
+    backgroundColor: '#20C997',
   },
   saveButton: {
-    backgroundColor: '#20C997', // Green button background
+    backgroundColor: '#20C997',
     borderRadius: 25,
     paddingVertical: 15,
     alignItems: 'center',

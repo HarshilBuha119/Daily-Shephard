@@ -1,6 +1,3 @@
-import Notification from "../ProfileSetup/Notification";
-
-
 export const Images={
     Home:require("./Home.png"),
     Home1:require("./Home-1.png"),
