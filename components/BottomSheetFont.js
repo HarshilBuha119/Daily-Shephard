@@ -29,7 +29,7 @@ export default function BottomSheetFont({ visible, onClose, onSave }) {
       openDuration={250}
       closeOnDragDown={true}
       closeOnPressMask={true}
-      handleComponent={() => <FloatingCloseButton onPress={onClose} />} // Pass onClose to FloatingCloseButton
+      handleComponent={() => <FloatingCloseButton onPress={onClose} />}
       onClose={onClose}
       customStyles={{
         container: styles.sheetContainer,
