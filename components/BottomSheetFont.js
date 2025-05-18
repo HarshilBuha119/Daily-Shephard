@@ -1,10 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { View, Text, Pressable, StyleSheet } from 'react-native';
+import React, {useState, useRef, useEffect} from 'react';
+import {View, Text, Pressable, StyleSheet} from 'react-native';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import FloatingCloseButton from './FloatingCloseButton';
 
-export default function BottomSheetFont({ visible, onClose, onSave }) {
-   const [selectedFontSize, setSelectedFontSize] = useState('medium'); 
+export default function BottomSheetFont({visible, onClose, onSave}) {
+  const [selectedFontSize, setSelectedFontSize] = useState('medium');
   const bottomSheetRef = useRef(null);
 
   useEffect(() => {
@@ -18,8 +18,8 @@ export default function BottomSheetFont({ visible, onClose, onSave }) {
   const handleSave = () => {
     onSave(selectedFontSize);
     setTimeout(() => {
-    onClose();
-  }, 1);
+      onClose();
+    }, 1);
   };
 
   return (
@@ -34,38 +34,40 @@ export default function BottomSheetFont({ visible, onClose, onSave }) {
       customStyles={{
         container: styles.sheetContainer,
         draggableIcon: styles.draggableIcon,
-      }}
-    >
+      }}>
       <View style={styles.contentContainer}>
         <Text style={styles.title}>Font Size</Text>
 
         <Pressable
           style={styles.option}
-          onPress={() => setSelectedFontSize('small')}
-        >
+          onPress={() => setSelectedFontSize('small')}>
           <Text style={styles.optionText}>Small</Text>
           <View style={styles.radioButton}>
-            {selectedFontSize === 'small'  && <View style={styles.radioButtonSelected} />}
+            {selectedFontSize === 'small' && (
+              <View style={styles.radioButtonSelected} />
+            )}
           </View>
         </Pressable>
 
         <Pressable
           style={styles.option}
-          onPress={() => setSelectedFontSize('medium')}
-        >
+          onPress={() => setSelectedFontSize('medium')}>
           <Text style={styles.optionText}>Medium</Text>
           <View style={styles.radioButton}>
-            {selectedFontSize === 'medium' && <View style={styles.radioButtonSelected} />}
+            {selectedFontSize === 'medium' && (
+              <View style={styles.radioButtonSelected} />
+            )}
           </View>
         </Pressable>
 
         <Pressable
           style={styles.option}
-          onPress={() => setSelectedFontSize('large')}
-        >
+          onPress={() => setSelectedFontSize('large')}>
           <Text style={styles.optionText}>Large</Text>
           <View style={styles.radioButton}>
-            {selectedFontSize === 'large' && <View style={styles.radioButtonSelected} />}
+            {selectedFontSize === 'large' && (
+              <View style={styles.radioButtonSelected} />
+            )}
           </View>
         </Pressable>
 
