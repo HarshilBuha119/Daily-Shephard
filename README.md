@@ -2,6 +2,9 @@
 
 APK LINK:  https://drive.google.com/drive/folders/1tl3a0q8nyx6NO81umOpWuCQ8LX-DZ1jG?usp=sharing
 
+https://github.com/user-attachments/assets/2e83d2eb-6674-4a03-851e-cb82a059ff98
+
+
 # Daily Shepherd App
 
 **Daily Shepherd** is a spiritually enriching mobile application designed to provide daily devotional content, scriptures, and personalized experiences to strengthen your walk with God. Built with modern mobile technologies, this app offers a clean user interface, curated content, and interactive features.
@@ -25,7 +28,10 @@ APK LINK:  https://drive.google.com/drive/folders/1tl3a0q8nyx6NO81umOpWuCQ8LX-DZ
 
 - **Framework**: React Native (TypeScript)
 - **Navigation**: React Navigation (Native Stack)
-- **State Management**: Redux with Persisted State
+- **State Managemen
+
+
+t**: Redux with Persisted State
 - **UI Components**: React Native Elements, Gesture Handler
 - **Assets**: Custom icons and imagery for spiritual themes
 
