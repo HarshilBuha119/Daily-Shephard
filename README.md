@@ -28,10 +28,7 @@ https://github.com/user-attachments/assets/2e83d2eb-6674-4a03-851e-cb82a059ff98
 
 - **Framework**: React Native (TypeScript)
 - **Navigation**: React Navigation (Native Stack)
-- **State Managemen
-
-
-t**: Redux with Persisted State
+- **State Management**: Redux with Persisted State
 - **UI Components**: React Native Elements, Gesture Handler
 - **Assets**: Custom icons and imagery for spiritual themes
 
