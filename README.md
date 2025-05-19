@@ -4,70 +4,46 @@ APK LINK:  https://drive.google.com/drive/folders/1tl3a0q8nyx6NO81umOpWuCQ8LX-DZ
 
 https://github.com/user-attachments/assets/2e83d2eb-6674-4a03-851e-cb82a059ff98
 
+# Daily Shepherd App
 
-📖 Daily Shephard App
-This mobile app delivers daily Bible verses to users along with reflections, teaching materials, and a supportive community. Users can customize their spiritual experience through notifications, explore past verses, listen to curated podcasts, and engage with others via comments. The app is supported by a full-featured admin dashboard for content management and podcast curation.
+**Daily Shepherd** is a spiritually enriching mobile application designed to provide daily devotional content, scriptures, and personalized experiences to strengthen your walk with God. Built with modern mobile technologies, this app offers a clean user interface, curated content, and interactive features.
 
-📲 Features
-🧭 App Navigation Flow
-Splash Screen: Displays logo and tagline with a smooth transition to login or home.
+---
 
-Login / Signup: Secure user authentication with email and password. Profile picture upload during signup.
+## ✨ Features
 
-Onboarding: Step-by-step walkthrough of key app features.
+- 📖 **Daily Devotionals**: Inspirational and scriptural devotionals to guide your spiritual journey.
+- 🙏 **Prayer Requests**: Submit and manage your personal prayer intentions.
+- 🔔 **Notifications**: Receive reminders for new devotionals and events.
+- 🧑‍💼 **Profile Setup**: Personalize your spiritual feed with an intuitive onboarding process.
+- ❤️ **Favorites**: Save your favorite devotionals or scripture passages.
+- 💬 **Comments & Community**: Engage with devotional content through comments.
+- 📚 **Sermon/Content Detail Screen**: In-depth view for spiritual posts or articles.
+- 🧭 **Bottom Tab Navigation**: Smooth navigation across the app's main sections.
 
-Notification Preferences: Users can set timing and type of verse delivery (verse only, verse + reflection, etc.).
+---
 
-Home Dashboard:
+## 📱 Tech Stack
 
-Daily Bible verse with audio playback.
+- **Framework**: React Native (TypeScript)
+- **Navigation**: React Navigation (Native Stack)
+- **State Management**: Redux with Persisted State
+- **UI Components**: React Native Elements, Gesture Handler
+- **Assets**: Custom icons and imagery for spiritual themes
 
-Reflections, prayers, teachings.
+---
 
-Community comments, shareable verse cards.
+## 🚀 Getting Started
 
-Save to favourites and explore related resources.
+### Prerequisites
 
-Comments Section:
+- Node.js & npm/yarn
+- React Native CLI or Expo CLI
+- Android Studio / Xcode for emulator testing
 
-Post, view, and report inappropriate comments.
+### Installation
 
-Auto-moderation after multiple reports.
-
-History Tab: Browse previous verses and their content. Includes search by keyword or topic.
-
-Podcast Directory: Curated list of spiritual podcasts fetched from admin dashboard with external playback support.
-
-Profile Management:
-
-Edit name, password, notification settings.
-
-Toggle light/dark theme and adjust font size.
-
-View and manage favourites.
-
-Delete account or log out.
-
-Offline Access:
-
-View previously loaded daily verse and favourites without internet.
-
-Push Notifications: Scheduled delivery of daily verses with verse text and reference.
-
-
-📦 Tech Stack
-Frontend (Mobile): React Native (iOS/Android)
-
-Backend: Node.js / Express / Firebase
-
-Admin Dashboard: React + Firebase Admin SDK
-
-Database: Firestore / Realtime Database
-
-Storage: Firebase Cloud Storage
-
-Authentication: Firebase Auth
-
-Notifications: Firebase Cloud Messaging (FCM)
-
-Analytics: Google Firebase Analytics
+```bash
+git clone https://github.com/yourusername/daily-shepherd.git
+cd daily-shepherd
+npm install
