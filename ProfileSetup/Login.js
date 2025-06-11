@@ -6,25 +6,62 @@ import {
   StyleSheet,
   StatusBar,
   Pressable,
+  ActivityIndicator,
 } from 'react-native';
 import {useSelector} from 'react-redux';
 import {Images} from '../assets/Images';
 import {selectIsSignedIn} from '../redux/slices/authSlice';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithCredential,
+} from '@react-native-firebase/auth';
+
 export default function Login({navigation}) {
   const isSignedIn = useSelector(selectIsSignedIn);
-  if (isSignedIn) {
-    navigation.replace('Main');
-  }
+  const [loading, setLoading] = useState(false); // <-- ADD LOADING STATE
+
+  useEffect(() => {
+    if (isSignedIn) {
+      navigation.replace('Main');
+    }
+  }, [isSignedIn, navigation]);
+
   const handleAppleSignIn = () => {
     navigation.navigate('Profile Setup');
   };
-  const onGoogleButtonPress = () => {
-    navigation.navigate('Profile Setup');
-    console.log('Logged in');
-  };
+
+  async function onGoogleButtonPress() {
+    try {
+       // <-- START LOADING
+      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+      console.log("h");
+      setLoading(true);
+      
+      const signInResult = await GoogleSignin.signIn();
+      console.log("hi");
+      
+      const idToken = signInResult?.idToken || signInResult?.data?.idToken;
+      console.log("idToken", idToken);
+      if (!idToken) {
+        throw new Error('No ID token found');
+      }
+
+      const googleCredential = GoogleAuthProvider.credential(idToken);
+      await signInWithCredential(getAuth(), googleCredential);
+      navigation.replace('Profile Setup');
+    } catch (error) {
+      console.error('Google Sign-In Error:', error);
+      // Optional: Show user feedback
+    } finally {
+      setLoading(false); // <-- STOP LOADING
+    }
+  }
+
   return (
     <View style={styles.container}>
-      <StatusBar hidden />
+      <StatusBar translucent />
       <Image style={styles.image} source={Images.Shephard} />
       <View style={styles.innerContainer}>
         <View>
@@ -39,29 +76,39 @@ export default function Login({navigation}) {
           </Text>
         </View>
 
-        <View style={styles.buttonContainer}>
-          <Pressable onPress={handleAppleSignIn} style={styles.rowA}>
-            <Image
-              source={Images.Apple}
-              style={styles.images}
-              resizeMode="contain"
-            />
-            <Text style={[styles.sign, {color: 'black'}]}>
-              Sign In with Apple
-            </Text>
-          </Pressable>
+        {loading ? (
+          <ActivityIndicator size="large" color="#20C997" style={{marginTop: 40}} />
+        ) : (
+          <View style={styles.buttonContainer}>
+            <Pressable
+              onPress={handleAppleSignIn}
+              style={[styles.rowA, loading && styles.disabledButton]}
+              disabled={loading}>
+              <Image
+                source={Images.Apple}
+                style={styles.images}
+                resizeMode="contain"
+              />
+              <Text style={[styles.sign, {color: 'black'}]}>
+                Sign In with Apple
+              </Text>
+            </Pressable>
 
-          <Pressable onPress={onGoogleButtonPress} style={[styles.rowG]}>
-            <Image
-              source={Images.Google}
-              style={styles.images}
-              resizeMode="contain"
-            />
-            <Text style={[styles.sign, {color: 'white'}]}>
-              Sign In with Google
-            </Text>
-          </Pressable>
-        </View>
+            <Pressable
+              onPress={onGoogleButtonPress}
+              style={[styles.rowG, loading && styles.disabledButton]}
+              disabled={loading}>
+              <Image
+                source={Images.Google}
+                style={styles.images}
+                resizeMode="contain"
+              />
+              <Text style={[styles.sign, {color: 'white'}]}>
+                Sign In with Google
+              </Text>
+            </Pressable>
+          </View>
+        )}
       </View>
 
       <Text style={styles.policy}>
@@ -134,7 +181,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   disabledButton: {
-    opacity: 0.7,
+    opacity: 0.5,
   },
   policy: {
     color: 'white',

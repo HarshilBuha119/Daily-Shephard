@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "256241932937",
+    "project_id": "daily-80a96",
+    "storage_bucket": "daily-80a96.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256241932937:android:0463968a0f9268b2560458",
+        "android_client_info": {
+          "package_name": "com.dailyshephard"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256241932937-h75o51skug128gslo1lh59uqv5i78592.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dailyshephard",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "256241932937-a9p4v3off9g4b8b64kgf9700q3q67n9h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxqS1HNdh9cNtzQxrIW2s71oD-jDpiLZk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256241932937-a9p4v3off9g4b8b64kgf9700q3q67n9h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

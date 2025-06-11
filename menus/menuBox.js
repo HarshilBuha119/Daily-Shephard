@@ -1,5 +1,4 @@
 import {View, Text} from 'react-native';
-import React, { Children } from 'react';
 import { styles } from '../components/Styles';
 
 function MenuBox ({title, children}){

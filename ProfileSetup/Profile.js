@@ -86,7 +86,7 @@ export default function Profile({navigation}) {
             <Text style={styles.legend}>Email</Text>
           </View>
         </View>
-
+        <View style={styles.flexSpacer} />
         <Pressable style={styles.button} onPress={handleContinue}>
           <Text style={styles.continue}>Continue</Text>
         </Pressable>
@@ -141,15 +141,15 @@ const styles = StyleSheet.create({
     left: 15,
     paddingHorizontal: 5,
   },
+  flexSpacer: {
+    flex: 1,
+  },
   button: {
     backgroundColor: '#20C997',
     margin: 20,
     padding: 16,
     borderRadius: 35,
-    position: 'absolute',
     bottom: 20,
-    left: 0,
-    right: 0,
   },
   continue: {
     color: '#18171C',

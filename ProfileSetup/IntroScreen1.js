@@ -4,18 +4,18 @@ import {StyleSheet, View, Pressable, Text, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Images} from '../assets/Images';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import { useDispatch } from 'react-redux';
-import { completeIntro } from '../redux/slices/introSlice';
-import { CommonActions } from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {completeIntro} from '../redux/slices/introSlice';
+import {CommonActions} from '@react-navigation/native';
 export default function IntroScreen1() {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const handleSkip = () => {
-    dispatch(completeIntro())
+    dispatch(completeIntro());
     navigation.dispatch(
-      CommonActions.reset({ index: 0,
-      routes: [{ name: 'Login' }], }) );
+      CommonActions.reset({index: 0, routes: [{name: 'Login'}]}),
+    );
   };
 
   const handleNext = () => {

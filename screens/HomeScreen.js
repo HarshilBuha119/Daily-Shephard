@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#20C997',
     opacity: 0.4,
     bottom: -1,
-    width: 112,
+    width: 120,
     height: 12,
   },
   video: {

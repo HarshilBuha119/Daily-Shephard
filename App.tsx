@@ -11,7 +11,7 @@ import DetailScreen from './screens/DetailScreen';
 import FavoritesScreen from './ProfileScreen/FavoritesScreen';
 import ProfileEditScreen from './ProfileSetup/ProfileEditScreen';
 import CommentsScreen from './screens/CommentsScreen';
-import {  GestureHandlerRootView } from 'react-native-gesture-handler';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {Images} from './assets/Images';
 import {Image, TouchableOpacity} from 'react-native';
 import {store, persistor} from './redux/store';
@@ -20,16 +20,22 @@ import {PortalProvider} from '@gorhom/portal';
 import {PersistGate} from 'redux-persist/integration/react';
 import History from './screens/History';
 import moment from 'moment';
-import { hasSeenIntro } from './redux/slices/introSlice';
+import {hasSeenIntro} from './redux/slices/introSlice';
 import {selectIsSignedIn} from './redux/slices/authSlice';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+GoogleSignin.configure({
+  webClientId:
+    '256241932937-a9p4v3off9g4b8b64kgf9700q3q67n9h.apps.googleusercontent.com',
+});
+
 const Stack = createNativeStackNavigator();
 const NavigationLogin = () => {
-  const hasSeen=useSelector(hasSeenIntro)
+  const hasSeen = useSelector(hasSeenIntro);
   console.log(hasSeen);
   return (
     <Stack.Navigator
-    initialRouteName={!hasSeen ? 'Intro1' : 'Login'}
-      screenOptions={{ 
+      initialRouteName={!hasSeen ? 'Intro1' : 'Login'}
+      screenOptions={{
         headerShown: false,
         statusBarBackgroundColor: '#18171C',
       }}>
@@ -152,16 +158,16 @@ const AppContent = () => {
 };
 const App = () => {
   return (
-    <GestureHandlerRootView style={{flex:1}}>
-    <PortalProvider>
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <NavigationContainer>
-            <AppContent />
-          </NavigationContainer>
-        </PersistGate>
-      </Provider>
-    </PortalProvider>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <PortalProvider>
+        <Provider store={store}>
+          <PersistGate loading={null} persistor={persistor}>
+            <NavigationContainer>
+              <AppContent />
+            </NavigationContainer>
+          </PersistGate>
+        </Provider>
+      </PortalProvider>
     </GestureHandlerRootView>
   );
 };

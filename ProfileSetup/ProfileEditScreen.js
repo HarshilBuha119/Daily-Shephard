@@ -17,7 +17,6 @@ import {updateProfile} from '../redux/slices/profileSlice';
 export default function EditProfile({navigation}) {
   const profile = useSelector(state => state.profile);
   const dispatch = useDispatch();
-
   const [selectedImage, setSelectedImage] = useState(profile.image);
   const [name, setName] = useState(profile.name);
   const [email, setEmail] = useState(profile.email);

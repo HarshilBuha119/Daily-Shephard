@@ -1,4 +1,4 @@
-package com.daily
+package com.dailyshephard
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
