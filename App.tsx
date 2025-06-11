@@ -25,7 +25,7 @@ import {selectIsSignedIn} from './redux/slices/authSlice';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 GoogleSignin.configure({
   webClientId:
-    '256241932937-a9p4v3off9g4b8b64kgf9700q3q67n9h.apps.googleusercontent.com',
+    'Your weClientId here',
 });
 
 const Stack = createNativeStackNavigator();
