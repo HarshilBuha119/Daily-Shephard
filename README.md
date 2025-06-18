@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Daily Shepherd App
 
 **Daily Shepherd** is a spiritually enriching mobile application designed to provide daily devotional content, scriptures, and personalized experiences to strengthen your walk with God. Built with modern mobile technologies, this app offers a clean user interface, curated content, and interactive features.
@@ -38,7 +37,6 @@
 
 ### Installation
 
-=======
 
 
 APK LINK:  https://drive.google.com/drive/folders/1tl3a0q8nyx6NO81umOpWuCQ8LX-DZ1jG?usp=sharing
@@ -84,7 +82,6 @@ https://github.com/user-attachments/assets/2e83d2eb-6674-4a03-851e-cb82a059ff98
 
 ### Installation
 
->>>>>>> 69e99855cda887fe1fd8c00034774398c04c2397
 ```bash
 git clone https://github.com/yourusername/daily-shepherd.git
 cd daily-shepherd
