@@ -17,11 +17,12 @@ import {
   getAuth,
   signInWithCredential,
 } from '@react-native-firebase/auth';
+import LoginApi from '../Instances/LoginApi';
 
 export default function Login({navigation}) {
   const isSignedIn = useSelector(selectIsSignedIn);
   const [loading, setLoading] = useState(false); // <-- ADD LOADING STATE
-
+    
   useEffect(() => {
     if (isSignedIn) {
       navigation.replace('Main');
@@ -34,7 +35,6 @@ export default function Login({navigation}) {
 
   async function onGoogleButtonPress() {
     try {
-       // <-- START LOADING
       await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
       console.log("h");
       setLoading(true);
@@ -53,9 +53,8 @@ export default function Login({navigation}) {
       navigation.replace('Profile Setup');
     } catch (error) {
       console.error('Google Sign-In Error:', error);
-      // Optional: Show user feedback
     } finally {
-      setLoading(false); // <-- STOP LOADING
+      setLoading(false); 
     }
   }
 

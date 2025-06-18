@@ -34,7 +34,6 @@ export default function ProfileScreen() {
       });
       setChannelId(id);
     }
-
     async function setupFCM() {
       const authStatus = await messaging().requestPermission();
       const enabled =
@@ -149,7 +148,7 @@ export default function ProfileScreen() {
             await GoogleSignin.signOut();
             dispatch(cleanFavourite());
             dispatch(logout());
-
+            Alert.alert('Account deleted successfully');
             console.log('Account deleted');
             await persistor.purge();
           },
@@ -171,6 +170,8 @@ export default function ProfileScreen() {
             await GoogleSignin.signOut();
             dispatch(cleanFavourite());
             dispatch(logout());
+            Alert.alert('Logged out successfully');
+            console.log('User logged out');
             await persistor.purge();
           },
         },
